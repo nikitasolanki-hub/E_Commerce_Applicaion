@@ -2,12 +2,16 @@ const express = require('express');
 const  mongoose = require('mongoose');
 require('dotenv').config();
 
+const cookieParser = require('cookie-parser');
+
+
 
 
 const app = express();
-const PORT = process.env.PORT || 5000;
-
 app.use(express.json());
+app.use(cookieParser())
+
+const PORT = process.env.PORT || 5000;
 
 app.get('/', (req, res) => {
   res.json({msg : "This is the backend of the e-commerce application"});
