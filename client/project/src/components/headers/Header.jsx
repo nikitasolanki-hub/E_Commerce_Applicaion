@@ -13,7 +13,7 @@ const Header = () => {
 
   const logoutUser = async () => {
     try {
-      await axios.get("http://localhost:8000/user/logout", {
+      await axios.get("http://localhost:5000/user/logout", {
         withCredentials: true,
       });
 

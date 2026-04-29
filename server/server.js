@@ -5,11 +5,15 @@ const express = require('express');
 // Import Mongoose (ODM to interact with MongoDB)
 const  mongoose = require('mongoose')
 
+const cors = require("cors");
+
 // Load environment variables from .env into process.env
 require('dotenv').config();
 
 // Middleware to parse cookies from incoming requests
 const cookieParser = require('cookie-parser');
+
+
 
 
 // Create an Express application instance
@@ -21,7 +25,7 @@ app.use(express.json());
 // Middleware to parse cookies and make them available in req.cookies
 app.use(cookieParser())
 
-
+app.use(cors());
 // Define server port (from .env or fallback to 5000)
 const PORT = process.env.PORT || 5000;
 
@@ -33,6 +37,7 @@ app.get('/', (req, res) => {
 // Mount user routes under "/user"
 //This is route mounting. It connects your main server to a group of routes.
 app.use('/user', require('./routes/useRoutes'));
+app.use('/api', require('./routes/productRouter'));
 
 //connect MongoDB using connection string from .env
 mongoose

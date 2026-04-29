@@ -9,7 +9,7 @@ export const GlobalState = createContext();
 export const DataProvider = ({ children }) => {
   const [token, setToken] = useState("");
 
-  useEffect(() => {
+  useEffect(() => {0-9 
     const firstLogin = localStorage.getItem("firstLogin");
     if (!firstLogin) return;
 

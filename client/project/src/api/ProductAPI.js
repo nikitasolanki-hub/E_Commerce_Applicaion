@@ -6,15 +6,16 @@ const ProductAPI = () => {
 
   useEffect(() => {
     const getProducts = async () => {
-      const res = await axios.get("http://localhost:8000/api/products");
-      setProducts(res.data);
+    const res = await axios.get("http://localhost:5000/api/products");
+        console.log("API Response:", res.data);
+        setProducts(res.data);
     };
-
+    
     getProducts();
   }, []);
 
   return {
-    products: [products, setProducts],
+    products: [products, setProducts]
   };
 };
 

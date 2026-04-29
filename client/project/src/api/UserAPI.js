@@ -11,7 +11,7 @@ const UserAPI = (token) => {
 
     const getUser = async () => {
       try {
-        const res = await axios.get("http://localhost:8000/user/info", {
+        const res = await axios.get("http://localhost:5000/user/info", {
           headers: {
             Authorization: `Bearer ${token}`,
           },
