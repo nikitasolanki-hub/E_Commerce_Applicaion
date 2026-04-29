@@ -1,5 +1,7 @@
 import { createContext, useEffect, useState } from "react";
 import axios from "axios";
+import ProductAPI from "../api/ProductAPI";
+import UserAPI from "../api/UserAPI";
 
 // eslint-disable-next-line react-refresh/only-export-components
 export const GlobalState = createContext();
@@ -14,7 +16,7 @@ export const DataProvider = ({ children }) => {
     const refreshToken = async () => {
       try {
         const res = await axios.get(
-          "http://localhost:8000/user/refresh_token",
+          "http://localhost:5000/user/refresh_token",
           { withCredentials: true }
         );
         setToken(res.data.accesstoken);
@@ -26,8 +28,10 @@ export const DataProvider = ({ children }) => {
     refreshToken();
   }, []);
 
-  const state = {
+   const state = {
     token: [token, setToken],
+    productsAPI: ProductAPI(),
+    userAPI: UserAPI(token),
   };
 
   return (
