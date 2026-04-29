@@ -1,3 +1,5 @@
+//connect business logic
+
 const userCtrl = require('../controllers/userCtrl')
 const auth = require('../middleware/auth')
 
@@ -12,7 +14,7 @@ router.get('/logout',userCtrl.logout)
 
 router.get('/refresh_token',userCtrl.refreshtoken)
 
-router.get('/infor',auth,userCtrl.getUser)
+router.get('/info',auth, userCtrl.getUser)
  
 
 module.exports = router

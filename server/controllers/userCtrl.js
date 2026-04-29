@@ -54,7 +54,7 @@ const userCtrl = {
     
         }
         catch(err){
-return res.status(500).json({msg:err.message})
+          return res.status(500).json({msg:err.message})
         }
        
 
@@ -91,17 +91,26 @@ return res.status(500).json({msg:err.message})
 
         }
     },
-    getUser:async(req,res)=>{
-        try{
-            const user = await Users.findById(req.user.id).select('-password')
+    getUser: async (req, res) => {
+        try {
+    
+        if (!req.user || !req.user.id) {
+          return res.status(401).json({ msg: "Unauthorized" });
+          }
 
-            if(!user) return res.status(400).json({msg:"User Not Found"})
-            res.json(user)
+       const user = await Users.findById(req.user.id).select("-password");
+
+        if (!user) {
+          return res.status(404).json({ msg: "User not found" });
         }
-        catch(err){
-            return res.status(500).json({msg:err.message})
-        }
-    },
+
+          return res.json({ user });
+
+        } catch (err) {
+            console.log("getUser error:", err.message);
+            return res.status(500).json({ msg: "Server error" });
+          }
+    }
     
 }
 

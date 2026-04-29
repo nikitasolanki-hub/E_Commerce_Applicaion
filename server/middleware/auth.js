@@ -2,10 +2,15 @@ const jwt = require('jsonwebtoken')
 
 const auth = (req,res,next) => {
     try{
-        const token = req.header("Authorization")
-        console.log(token)
+        let token = req.header("Authorization")
+        console.log("AUTH HEADER:" ,token)
+
         if(!token) return res.status(400).json({msg:"Invalid Authentication"})
 
+        // Supports: "Bearer token" and plain "token"
+        if (token.startsWith("Bearer ")) {
+          token = token.split(" ")[1];
+         }
         jwt.verify(token,process.env.ACCESS_TOKEN_SECRET,(err,user)=>{
             if(err) return res.status(400).json({msg:"Invalid Authentication"})
 
