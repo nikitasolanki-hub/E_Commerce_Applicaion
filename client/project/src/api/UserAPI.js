@@ -30,11 +30,45 @@ const UserAPI = (token) => {
     getUser();
   }, [token]);
 
+ 
+  const addCart = async (product) => {
+    if (!isLogged) {
+      alert("Please login to continue");
+      return;
+    }
+
+    const check = cart.every((item) => item._id !== product._id);
+
+    if (!check) {
+      alert("Product already in cart");
+      return;
+    }
+
+    const newCart = [...cart, { ...product, quantity: 1 }];
+    setCart(newCart);
+
+    try {
+      await axios.patch(
+        "http://localhost:5000/user/addcart",
+        { cart: newCart },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      alert("Added to cart");
+    } catch (err) {
+      alert(err.response?.data?.msg || "Add to cart failed");
+    }
+  };
+
   return {
     isLogged: [isLogged, setIsLogged],
     isAdmin: [isAdmin, setIsAdmin],
     cart: [cart, setCart],
-  };
+    addCart,  };
 };
 
 export default UserAPI;

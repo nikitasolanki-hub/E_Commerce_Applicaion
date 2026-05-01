@@ -8,7 +8,8 @@ const ProductList = ({product,isAdmin}) => {
       {
         isAdmin && <input type='checkbox' checked={product.checked}/>
       }
-        <img src={product.images.url} alt=''/>
+        <img src={product.images.url }
+         alt={product.title || "product"}/>
 
         <div className='product_box'>
             <h2 title={product.title}>{product.title}</h2>
@@ -16,7 +17,8 @@ const ProductList = ({product,isAdmin}) => {
             <p>{product.description}</p>
         </div>
 
-       <BtnRender product={product}/>
+    
+      <BtnRender product={product} isAdmin={isAdmin} />
     </div>
   )
 }

@@ -13,6 +13,8 @@ require('dotenv').config();
 // Middleware to parse cookies from incoming requests
 const cookieParser = require('cookie-parser');
 
+const fileUpload = require("express-fileupload");
+
 
 
 
@@ -25,7 +27,15 @@ app.use(express.json());
 // Middleware to parse cookies and make them available in req.cookies
 app.use(cookieParser())
 
-app.use(cors());
+app.use(cors({
+  origin: "http://localhost:5175",
+  credentials: true
+}));
+
+app.use(fileUpload({
+  useTempFiles: true
+}));
+
 // Define server port (from .env or fallback to 5000)
 const PORT = process.env.PORT || 5000;
 

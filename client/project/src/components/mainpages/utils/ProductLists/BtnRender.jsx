@@ -3,11 +3,10 @@ import { GlobalState } from '../../../../context/GlobalState'
 import { Link } from 'react-router-dom'
 import { useContext } from 'react'
 
-const BtnRender = (product) => {
+const BtnRender = ({ product, isAdmin}) => {
 
     const state = useContext(GlobalState)
-  const [isAdmin] = state.userAPI.isAdmin
-  const addCart = state.userAPI.addCart
+    const addCart = state.userAPI.addCart;
 
   return (
     <div className='row_btn'>
@@ -26,9 +25,16 @@ const BtnRender = (product) => {
     <Link id='btn_buy' to={`#!`} onClick={()=> addCart(product)}>
       Buy
       </Link>
+      <button
+            id="btn_buy"
+            onClick={() => addCart(product)} >
+            Add to Cart
+          </button>
+
       <Link id='btn_view' to={`detail/${product._id}`}>
           View
       </Link>
+     
       </>
 }
 </div>
