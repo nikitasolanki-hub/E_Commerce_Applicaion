@@ -1,5 +1,4 @@
 //connect business logic
-// const router = require("express").Router();
 const userCtrl = require('../controllers/userCtrl')
 const auth = require('../middleware/auth')
 
@@ -16,7 +15,7 @@ router.get('/refresh_token',userCtrl.refreshtoken)
 
 router.get('/info',auth, userCtrl.getUser)
 
-// router.patch("/addcart", auth, userCtrl.addCart);
+router.patch("/addcart", auth, userCtrl.addCart);
 
 
  
